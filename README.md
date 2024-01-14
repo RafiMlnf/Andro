@@ -193,26 +193,105 @@ Kode ini memberikan pengguna akses ke berbagai fitur dan aktivitas dalam aplikas
 ###  Capture hasil:
 
 ## 7. Maps
-
+- Mensetting depedensi maps pada `build.gradle`.
+```JAVA
+implementation("com.google.android.gms:play-services-maps:17.0.1")
+```
+Membuka aplikasi Google Maps dengan memanggil aplikasi sistem (Implicit intent).
 ```JAVA
 Intent mapIntent = new Intent(Intent.ACTION_VIEW);
                 mapIntent.setPackage("com.google.android.apps.maps");
 ```
-Membuka aplikasi Google Maps dengan memanggil aplikasi sistem (Implicit intent).
-
+Lalu mengarahkan kita ke target lokasi yang telah di setting.
 ```JAVA
  if (mapIntent.resolveActivity(getPackageManager()) != null) {
                     Uri gmmIntentUri = Uri.parse( "geo:0,0?q=" + Uri.encode( "Universitas Pelita Bangsa" ) );
 ```
-Lalu mengarahkan kita ke target lokasi yang telah di setting.
 
 ###  Capture hasil:
 
 ## 8. Splash
+Implementasi dari sebuah Splash Screen pada aplikasi, berguna sebagai intro aplikasi. Berikut adalah deskripsi singkat bagian-vbagian kode:  
+
+- Mensetting Splash pada `AndroidManifest` sebagai aktivitas pertama yang dijalankan
+```Java
+ <activity android:name=".Splash"
+            android:exported="true">
+            <intent-filter>
+```
+
+- Memberikan waktu splash selama 3 detik.
+```Java
+private static final int SPLASH_DELAY = 3000;
+```
+
+- Menggunakan Handler untuk menunda eksekusi kode selama 3 detik (sesuai dengan SPLASH_DELAY). Setelah delay berakhir, akan dijalankan Runnable yang berisi kode untuk membuat dan menjalankan Intent ke Menu, dan kemudian menyelesaikan aktivitas Splash Screen.
+```Java
+new Handler().postDelayed(new Runnable() {
+    @Override
+    public void run() {
+        Intent intent = new Intent( Splash.this, Menu.class);
+        startActivity(intent);
+        finish();
+    }
+}, SPLASH_DELAY);
+```
+
 ###  Capture hasil:
 
 ## 9. Fragment
+- ViewPagerAdapter
+`ViewPagerAdapter` adalah sebuah kelas yang mengimplementasikan `FragmentPagerAdapter` pada aplikasi Android. Fungsi utamanya adalah mengelola dan menyediakan tampilan fragmen untuk ditampilkan dalam suatu `ViewPager`.
+
+- ViewPagerActivity
+`ViewPagerActivity` mengelola daftar fragmen yang akan ditampilkan dalam `ViewPager`. Ini bisa termasuk membuat instance fragmen, menambahkan fragmen ke dalam `ViewPagerAdapter`, dan mengatur judul/judul halaman untuk setiap fragmen.
+
+```Java
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_menu);
+
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new Tab1(), "Thriller");
+        adapter.addFragment(new Tab2(), "Action");
+        adapter.addFragment(new Tab3(), "Romance");
+
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+    }
+}
+```
+
 ###  Capture hasil:
 
-## 10. Trailer
+## 10. Sinopsis dan Trailer
+
+```Java
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.sinopsis_(judulfilm));
+
+        WebView webView1 = findViewById(R.id.webView1);
+        String video1 = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/iaD2f2O9wGk\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+        webView1.loadData(video1, "text/html", "utf-8");
+        webView1.getSettings().setJavaScriptEnabled(true);
+        webView1.setWebChromeClient(new WebChromeClient());
+    }
+}
+```
+
+- Merinci implementasi aktivitas dalam aplikasi Android yang bertujuan untuk menampilkan sinopsis dengan trailer menggunakan `WebView`. Pertama, pada metode `onCreate`, layout aktivitas diatur menggunakan metode `setContentView` dengan merujuk pada layout `sinopsis_(film)`.
+
+- Selanjutnya, sebuah `WebView` dengan id "`webView1`" diinisialisasi dari layout XML dan kemudian dimanipulasi menggunakan beberapa konfigurasi. Video trailer dari YouTube disematkan ke dalam `WebView` menggunakan tag `iframe` HTML dan dimuat menggunakan metode `loadData`. Pengaturan JavaScript diaktifkan dengan `webView1.getSettings().setJavaScriptEnabled(true)`, dan `setWebChromeClient` digunakan untuk mendukung fungsionalitas Chrome pada WebView.
+
+- Dengan pengaturan ini, aktivitas ini secara efektif menampilkan sinopsis film dalam format video melalui `WebView`, memberikan pengguna pengalaman visual yang langsung terintegrasi ke dalam aplikasi.
+
 ###  Capture hasil:
+
+-------------------------------
+# TERIMA KASIH
