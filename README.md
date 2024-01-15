@@ -1,21 +1,22 @@
-# UAS - PEMROGRAMAN MOBILE 1
+# UAS PEMROGRAMAN MOBILE 1 - Android Studio
+![header](https://github.com/RafiMlnf/Andro/assets/115614668/c5c9c945-16f5-424b-b6e6-c49856b2ca06)
 
 ```
+Nama        : Ahmad Hafizhudin
+NIM         : 312210370
 Mata Kuliah : Pemrograman Mobile 1
 Dosen       : Donny Maulana, S.Kom., M.M.S.I.
-Nama        : Ega Chatrina Buddy
-NIM         : 312210412
 ```
 
-
+# Daftar dan penjelasan aktivitas yang telah dibuat :  
 ## 1. Hello
-Activity Hello adalah activit pertama yang dibuat, menampilkan activity yang ada tampilan teks didalamnya, contoh : Hello!
+Activity Hello adalah aktivitas pertama yang dibuat, menampilkan teks pada tampilan aktvitas.
 
 ```Java
 <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Halo, saya Ega Chatrina Buddy"
+        android:text="Halo, Apa Kabarnya?"
         android:textColor="#FF0000"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -251,7 +252,7 @@ new Handler().postDelayed(new Runnable() {
 
 -------------------------------
 
-###  Capture hasil semua activity yang saya buat:
+###  Demo aplikasi semua aktivitas yang saya buat:
 
 -------------------------------
-# TERIMA KASIH
+# TERIMA KASIH TELAH MEMBACA
